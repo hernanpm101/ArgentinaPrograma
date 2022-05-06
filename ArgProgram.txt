@@ -1,0 +1,819 @@
+Javascript
+
+https://www.youtube.com/watch?v=dvxjdLXVYTM
+
+----------------------------
+
+
+
+
+procedure LineaAlEste(){
+  Mover (Este)
+  PonerAzulejo()
+  Mover (Este)
+  PonerAzulejo()
+  IrAlBorde (Oeste)
+}
+procedure GuardaEnL() {
+  LineaAlEste()
+  repeat (2){
+    PonerAzulejo()
+    MoverN(1,Norte)
+ }
+  PonerAzulejo()
+  IrAlBorde (Sur)
+}
+
+
+
+
+-------------------------------
+
+
+procedure LineaAlEste(){
+  repeat(2){
+    PonerAzulejo()
+    Mover(Este)
+  }
+  PonerAzulejo()
+  IrAlBorde (Oeste)
+}
+
+procedure GuardaEnL(){
+  LineaAlEste()
+    repeat(2){
+      MoverN(1,Norte)
+      PonerAzulejo()
+  } 
+  IrAlBorde (Sur)
+}
+
+
+----------------------------------
+
+procedure ContarGente(micros, autos, bicicletas){
+  PonerN(micro*40,Verde + auto*4,Verde + bicicleta*1, Verde);
+}
+
+
+
+-------------------------------
+procedure CaminarDesconfiado(pasos){
+  MoverN(pasos div 2,Este)
+}
+
+
+------------------------------------
+procedure PonerAl (direccion,color){
+  Mover(direccion)
+  Poner(color)
+  Mover(opuesto(direccion))
+}
+
+--------------------------------------
+
+procedure Linea(direccion, color, longitud) {
+  repeat(longitud) {
+    Poner(color)
+    Mover(direccion)
+   }
+MoverN(longitud,opuesto(direccion))
+}
+
+
+-----------------------------------
+
+procedure Ele(direccion){
+  Linea(direccion,Azul,3)
+  Linea(siguiente(direccion),Azul,3)
+}
+
+-----------------------------------
+procedure CopiarVerdesEnRojas(color){
+  PonerN(nroBolitas(color),Rojo)
+  }
+
+-----------------------------------
+procedure CopiarVerdesEnRojas(){
+  nroBolitas(Verde)
+  PonerN(nroBolitas(Verde),Rojo)
+}
+
+
+Fijate que el enunciado nos dice que nroBolitas(color) nos devuelve una cantidad, que es la que nos indica cuántas bolitas rojas colocar. Por ende, tu uso del procedimiento PonerN está perfecto. Y con eso ya cumplimos con la consigna: poner bolitas rojas en la misma cantidad que hay de verdes.
+
+Entonces, en la solución estaría sobrando lo que tenés en la línea 2. Quitando eso va a funcionar. 
+
+¿Lo modificamos?
+
+procedure CopiarVerdesEnRojas(){
+  nroBolitas(color)
+  PonerN(nroBolitas(color),color)
+}
+
+
+--------------------------
+procedure CopiarVerdesEnRojas(color){
+  PonerN(nroBolitas(color),Rojo)
+  }
+
+
+------------------------------------
+procedure CopiarVerdesEnRojas(){
+  PonerN(nroBolitas(Verde),Rojo)
+  }
+---------------------------------
+
+procedure SacarTodas(color) {
+  SacarN(nroBolitas, cantidad  (color))
+}
+
+
+Ya que resuelve primero que nroBolitas(Rojo) es 2, ejecutando entonces:
+
+PonerN(2, Rojo)
+Lo mismo sucede con SacarTodas, queremos usar SacarN, que recibe dos argumentos:
+
+La cantidad a quitar.
+El color a quitar.
+SacarN(???, ???)
+Sabemos que el color que queremos quitar es el que viene por parámetro, por lo que podemos completar:
+
+SacarN(???, color)
+¿Pero y la cantidad? ¿No podemos usar nroBolitas? ¿Qué color le deberíamos dar a nroBolitas?
+
+¡Saludos!
+
+
+----------------------------------
+procedure SacarTodas(color){
+  SacarN(nroBolitas, color)
+}
+
+-----------------------------------
+procedure SacarRojoConMiedo() {
+  if (hayBolitas(Rojo)) {
+    Sacar(Rojo)
+  } 
+}
+
+-------------------------------------
+Creá un programa que se mueva al Este sólo si es posible. Recordá utilizar puedeMover(direccion).
+Es decir, a través de if hay que consultar si es que podemos movernos hacia el Este
+Para esto, es que tenes disponible puedeMover. En caso de que sea verdadero, debemos pasarle la instrucción de que lo haga y hacia esa dirección.
+Tené en cuenta, que si no se puede mover, no debe hacer nada.
+¿Quedó un poco más claro?
+
+
+-----------------------------------
+if ( condicion ) {
+  // lo que queremos que suceda si se cumple la condición
+}
+
+
+Fijate que en el lugar de la condición lo que tenemos que expresar es qué queremos que el programa evalué, y luego, en la línea siguiente, expresamos lo que tiene que suceder si la condición se cumplió. En este caso queremos que el cabezal se mueva al Este sólo si es posible, lo cual podríamos expresar como: evaluar si el cabezal puede moverse al Este, (y si se cumple) que se mueva el Este.
+Fijate que la condición sería puedeMover(Este), porque es esto lo que nos retornará true o false, y si esto se cumple, tenemos que mover el cabezal hacia el Este, ¿me explico?
+
+program{
+  if(/*condición*/){
+    //tareas que realiza si cumple la condición
+  }
+}
+
+
+--------------------------
+program{
+puedeMover(direccion)
+if (Mover(direccion)){
+Mover(Este)
+}
+}
+
+
+Sería: si puede moverse al Este, entonces, mover al Este. Lo que pusiste antes del if no va.
+
+
+---------------------
+program{
+  if (puedeMover(Este)){
+    Mover(Este)
+  }
+}
+
+----------------------------------
+Definí un procedimiento AsegurarUnaBolitaVerde() que se asegure que en la celda actual hay al menos una bolita verde. Esto es: si ya hay bolitas verdes no hay que hacer nada, pero si no hay tendría que poner una.
+
+-----------------------------------
+
+procedure AsegurarUnaBolitaVerde() {
+  if (not hayBolitas(Verde)){
+    Poner(Verde)
+  }
+}
+
+-----------------------------------
+
+procedure MoverComoSea() {
+    if (puedeMover(Oeste)) {
+        Mover(Oeste)
+    } else {
+        Mover(Norte)
+    }
+}
+
+----------------------------------------
+
+procedure PrenderOApagarLuz() {
+if (hayBolitas(Negro)) {
+    Sacar(Negro)
+    Poner(Verde)
+  }
+else (hayBolitas(Verde)) {
+    Sacar(Verde)
+    Poner(Negro)
+  }
+}
+
+----------------------------
+La sintaxis del IF-ELSE es la siguiente:
+
+if (  ) {
+--codigo
+}else{
+--codigo
+}
+
+------------------------------------
+
+procedure PrenderOApagarLuz() {
+if (hayBolitas(Verde)) {
+      Sacar(Verde) 
+      Poner(Negro) 
+  } else {
+    Sacar(Negro) 
+    Poner(Verde)
+  }
+}
+
+-----------------------------------
+
+procedure PrenderOApagarLuz(){
+  if (hayBolitas(Negro)){
+    Poner(Verde)
+  } else {
+      Sacar(Verde)
+      
+  }
+}
+
+--------------------------------------
+
+function nroBolitasTotal() {
+  return (nroBolitas(Azul) + nroBolitas(Negro) + nroBolitas(Rojo) + nroBolitas(Verde))
+}
+
+               I
+               I
+               V
+
+procedure MoverSegunBolitas() {
+  if (nroBolitasTotal() > 10) {
+    Mover(Este)
+  } else {
+    Mover(Norte)
+  }
+}
+
+--------------------------------------
+function todasExcepto(color){
+  return (nroBolitasTotal() -nroBolitas(color))
+}
+
+
+---------------------------------
+function rojoEsDominante(){
+return ((nroBolitasTotal() < todasExcepto(color))
+}
+
+------------------------------------
+
+function esLibreCostados() {
+  return (puedeMover(Este) && puedeMover(Oeste))
+}
+------------------------------------
+
+function hayAlgunaBolita(){
+  return (hayBolitas(Azul) || hayBolitas(Rojo) || hayBolitas(Verde) || hayBolitas(Negro))
+ }
+
+------------------------------------
+procedure AsegurarUnaBolitaVerde() {
+  if (not hayBolitas(Verde)){
+    Poner(Verde)
+  }
+}
+
+---------------------------------
+
+Negación: "da vuelta" una expresión booleana - ejemplo: not hayBolitas(Rojo).
+
+Conjunción: determina si se cumplen ambas condiciones - ejemplo: puedeMover(Norte) && puedeMover(Sur).
+
+Disyunción: determina si se cumple alguna de las condiciones - ejemplo: esInteligente() || tieneBuenaOnda()
+
+-----------------------------------------
+function hayBolitasAl(direccion,color){
+Mover(direccion)
+return(hayBolitas(color))
+}
+
+-------------------------------
+procedure MoverN(n, dir) {
+  repeat(n) {
+    Mover(dir)
+  }
+}
+
+-----------------------------------
+
+function hayBolitasLejosAl(direccion, color, distancia){
+  MoverN()
+  return 
+}
+
+
+function hayBolitasLejosAl(cantidad, direccion, color){
+  MoverN(cantidad, direccion)
+  return(hayBolitas(color))
+}
+
+
+¡Hola Ana! Un gusto saludarte, el día de hoy te ayudaré en tu consulta. 
+
+¡Estás muy cerca de lograrlo! Solamente tenés que revisar el orden en que están colocados los argumentos de la función hayBolitasLejosAl de tu código y cómo deberían estar según lo que pide la consigna.
+
+Fijate que el ejercicio nos dice:   Definí la función hayBolitasLejosAl(direccion, color, distancia). 
+
+La función la debemos definir tal que:
+
+El primer argumento es direccion por tanto acá la función espera recibir una palabra como: Este, Norte y no un número.
+El segundo argumento es color, acá espera recibir una palabra que hace referencia a un color como: Rojo, Verde, entre otras.
+Por último, el tercer argumento es distancia y aquí no espera recibir una palabra sino un número, asociado a una distancia, esto sería equivalente a lo que llamaste cantidad, solo que no está en el orden en que la función espera recibirlo.
+Si tenemos los argumentos en otro orden, probablemente nuestro código arroje un resultado distinto o incluso como en este caso, puede explotar y hacer ¡BOOM!.
+
+Espero haberte sido de ayuda y en cualquier caso, no dudes en volvernos a escribir, estamos para ayudarte.
+
+Saludos,
+Stephany.
+
+------------------------------------
+function hayBolitasLejosAl(direccion, color, distancia){
+  MoverN(distancia, direccion)
+  return (hayBolitas(color))
+}
+
+--------------------------------------
+function estoyRodeadoDe(color){
+  return (hayBolitasAl(Norte,Rojo)&&hayBolitasAl(Sur,Negro)&&hayBolitasAl(Este,Azul)&&hayBolitasAl(Oeste,Verde))
+}
+
+
+------------------------------------
+function hayLimite(){
+  return( not estoyEnUnBorde() || not estoyRodeadoDe(Rojo))
+}
+
+-------------------------------------
+
+function cuantoCuesta(monitor,memoria){
+  return ((monitor*60)+(memoria*200)+1000)
+}
+-----------------------
+
+function meConviene(pulgadas, memoria){
+  return pulgadas=>32 && memoria=>8 && cuantoCuesta(pulgadas, memoria)<6000;
+  }
+
+
+---------------------------------
+function meConviene(pulgadas, memoria){
+  return ((pulgadas>=32) && (memoria>=8) && (cuantoCuesta(pulgadas, memoria)<6000))
+  }
+
+
+---------------------------------------
+esta mal pero el not esta bien 
+---------------------------------------
+function estaCerca(frecuencia){
+  return(437>= frecuencia && 443<= frecuencia && frecuencia !==440)
+  }
+-----------------------------------
+
+
+function estaCerca(rango){
+  return rango===437 || rango===438 || rango===439 || rango===441 || rango===442 || rango===443;
+}
+
+---------------------------------------
+function escribirCartelito(titulo,nombre,apellido) {
+  return titulo + " " + nombre + " " + apellido
+}
+
+------------------------------------
+
+function escribirCartelito (titulo, nombre, apellido, cartelitoCorto) {
+  if (cartelitoCorto) { 
+    return titulo + " " + apellido
+  } else {
+    return titulo + " " + nombre + " " + apellido
+  }
+}
+
+-----------------------------------
+function escribirCartelitoOptimo(titulo,nombre,apellido,bool){
+return escribirCartelito(titulo,nombre,apellido,bool===)(longitud(nombre)+(longitud(apellido)>15)}
+
+-----------------------------------
+escribirCartelito((titulo,nombre,apellido,bool===(longitud(nombre)+(longitud(apellido)>15))
+
+------------------------------
+
+function quiereCartelCorto(nombre,apellido){
+  return longitud(nombre + apellido) >15;
+}
+
+function escribirCartelitoOptimo(titulo,nombre,apellido) {
+  return escribirCartelito(titulo,nombre,apellido,quiereCartelCorto(nombre,apellido))
+}
+
+
+-------------------------------------
+function decisionConMoneda(moneda,comidaA,comidaB){
+  if( moneda === "cara"){
+    return comidaA
+  } else {
+    return comidaB;
+  }     
+}
+-------------------------------------
+function valorEnvido(carta){
+  if (carta>=8){
+    return 0
+  } else {
+    return carta
+  }
+}
+
+-----------------------------------
+
+function puntosDeEnvidoTotales(carta1,palo1,carta2,palo2){
+ 
+if (palo1===palo2) {
+    return (valorEnvido(carta1)+ valorEnvido(carta2)+20)
+} else {
+  return Math.max(valorEnvido(carta1),valorEnvido(carta2))
+}}
+
+------------------------------------
+function    valeCantoTruco(canto){ 
+if  ("truco"){
+return 2;
+}
+if ("retruco"){
+ return 3;
+    } 
+if ("valeCuatro"){
+return 4;
+  }
+  }
+-------------------------------
+function validarColorVerdeORojo(color){
+if(color === "verde"){
+    return "muy bien, el color es verde!"
+}
+else{
+    return "el color no es verde y como solo tenemos dos colores posibles, sabemos que el color es rojo"
+}
+}
+-------------------------------
+if(/*primera condición*/)
+{ 
+    // código a ejecutar si se cumple la primera condición
+} 
+else if  (  /*segunda condición*/  ) 
+{ 
+    // código a ejecutar si no se cumplió la primera condición pero si se cumplió la segunda condición
+}
+else 
+{
+    // código a ejecutar si no se cumplió ninguna de las dos condiciones anteriores
+}
+
+--------------------------------------
+function funcionEgocentrica() {
+  imprimir("soy una función que imprime por pantalla");
+  imprimir("y estoy por devolver el valor 5");
+  return 5;
+}
+
+--------------------------------------
+function versosMartinFierro(){
+  imprimir("Aquí me pongo a cantar")
+  imprimir("Al compás de la vigüela;")
+  imprimir("Que el hombre que lo desvela")
+  imprimir("Una pena extraordinaria")
+  return 0
+}
+
+-------------------------------------
+function versosMartinFierro() {
+    imprimir("Aquí me pongo a cantar");
+    imprimir("Al compás de la vigüela;");
+    imprimir("Que el hombre que lo desvela");
+    imprimir("Una pena extraordinaria");
+}
+----------------------------------
+imprimir("Tirando dados");
+imprimir("La primera tirada dio " + tirarDado());
+imprimir("La segunda tirada dio " + tirarDado());
+imprimir("La tercera tirada dio " + tirarDado());
+------------------------------------
+
+function elefantesEquilibristas(numero){
+  return (numero) + " elefantes se balanceaban"
+}
+
+---------------------------------------
+function perimetroCirculo(radio){
+  return (2 * 3.14159265358979 * radio)
+}
+
+function areaCirculo(radio){
+  return (3.14159265358979 * radio * radio)
+}
+
+-----------------------------------
+let pi = 3.14159265358979;
+
+function perimetroCirculo(radio){
+  return (2 * pi * radio)
+}
+
+function areaCirculo(radio){
+  return (pi * radio * radio)
+}
+
+-------------------------------------
+let cargaMaximaEnKilogramos = 300;
+
+function ascensorSobrecargado(cantidadPersonas){
+  return cantidadPersonas * pesoPromedioPersonaEnKilogramos >= cargaMaximaEnKilogramos; 
+}
+
+-------------------------------------
+
+function aumentarFortuna(){
+ pesosEnMiBilletera=pesosEnMiBilletera*2;
+}
+
+-------------------------------------
+Actualizaciones como duplicar, triplicar, incrementar en uno o en una cierta cantidad son tan comunes que JavaScript presenta algunos atajos:
+
+x += y; //equivalente  x = x + y;
+x *= y; //equivalente  x = x * y;
+x -= y; //equivalente  x = x - y;
+x++;    //equivalente  x = x + 1;
+x/= y;  //equivalente  x = x / y;
+x%= y;  //equivalente  x = x % y;
+
+
+
+function cuentaExtravagante() {
+  let numero = 8;
+  numero *= 2;
+  numero += 4;
+  return numero;
+}
+
+
+  let numero = 8;   => aca declaras la variable numero y la inicias en 8.
+  numero = 2;        => aca usas esa variable numero que ya sabes que es 8  =>  numero=2 que es igual a 16
+  numero += 4;      => de nuevo usas la variable numero pero que ahora vale 16 => numero+=4 que es igual a 20
+  return numero;  => retorna numero que ahora es 20
+
+  Poner  numero *= 2;      =>      Es igual a poner numero= numero *2   =>   numero = 8 *2     => numero= 16
+  numero +=4   => es igual a poner numero= numero +4      =>  numero= 16+4  => numero =20
+------------------------------------
+
+let mochilaAbierta = true;
+
+function usarCierre(){
+  mochilaAbierta = !mochilaAbierta;
+}
+
+-------------------------------------
+
+function esMayorDeEdad(edad){
+  return edad >= 18;
+}
+
+function esMenorDeEdad(edad){
+  return !esMayorDeEdad(edad);
+}
+
+------------------------------------
+function esPeripatetico(profesion,nacionalidad,paseo){
+  return (profesion === "filosofo" && nacionalidad === "griego" && paseo > 2);
+}
+---------------------------------------
+
+function esFinDeSemana(dia){
+  return dia === "sábado"||dia === "domingo";
+}
+
+function estaCerrado(esFeriado, dia, horario) {
+  return esFeriado || (esFinDeSemana(dia)) || !dentroDeHorarioBancario(horario);
+}
+
+----------------------------------
+function tieneContraste(fondo,letra){
+  return esTonoClaro(fondo) && !esTonoClaro(letra) || esTonoClaro(letra) && !esTonoClaro(fondo)
+}
+
+------------------------------------
+
+function xor (a, b){
+  return a===b && a!==b || b!==a 
+}
+
+-------------------------------------
+
+function pagaConTarjeta(seCobraInteres, tarjeta, efectivoDisponible) {
+  return !seCobraInteres && cuotas(tarjeta) >= 3 || efectivoDisponible < 100;
+}
+
+-------------------------------------
+
+function sePuedeConcentrar(bebida, temperatura,estaProgramando){
+  return (("mate"=== bebida) &&(temperatura === 80)) && estaProgramando || (("té"=== bebida) && (temperatura >= 95)) && estaProgramando;
+}
+
+-----------------------------------
+
+function sePuedeConcentrar(infusion, temperatura, estaProgramando) {
+  return infusionATemperaturaCorrecta(infusion, temperatura) && estaProgramando;
+}
+
+-------------------------------------
+
+function puedeSubirse(altura,conAdulto,sinCardio){
+return (altura >= 1.2 && conAdulto || altura >= 1.5) && !sinCardio;
+}
+----------------------------
+
+let pertenencias = ["espada", "escudo", "antorcha"];
+//longitud(pertenencias) devuelve 3;
+
+agregar(pertenencias, "amuleto mágico");
+//ahora longitud(pertenencias) devuelve 4
+
+
+---------------------------------
+
+function agregar(unaLista, unElemento) /* ... */
+// Inserta unElemento al final de unaLista.
+// Este es un procedimiento que no retorna nada pero modifica a unaLista:
+//
+//   let cancionesFavoritas = ["La colina de la vida", "Zamba por vos"]
+//   agregar(cancionesFavoritas, "Seminare")
+//   cancionesFavoritas
+//  ["La colina de la vida", "Zamba por vos", "Seminare"]
+
+---------------------------------------
+
+function trasladar(unaLista,otraLista,numero) {
+  remover(unaLista, numero) || agregar(otraLista, numero);
+}
+
+---------------------------------------
+
+function contiene(lista,elemento){
+  return posicion(lista,elemento)!== -1;
+}
+
+---------------------------------------
+
+let medallas = ["oro", "plata", "bronce"];
+
+function medallaSegunPuesto(posicion){
+  if (posicion>=1 && posicion<=3) {
+    return medallas [posicion - 1]
+
+  } else {
+
+    return "nada"
+  }
+}
+
+-------------------------------------
+
+for(let precio of [10, 100, 87 ]) {
+  plataEnBilletera  = plataEnBilletera - precio
+}
+
+---son lo mismo----
+
+function saludar(personas) {
+  for(let persona of personas) {
+    imprimir("hola"+" "+ persona)
+  }
+}
+
+------------------------------------
+
+function temperaturaDePlaneta(planeta){
+return planeta.nombre + " " + "tiene una temperatura promedio de"+ " " + planeta.temperaturaPromedio + " " + "grados";
+}
+
+---------------------------------
+function masDificilDeCocinar(unPostre, otroPostre){
+  if ((longitud(unPostre.ingredientes)) > (longitud(otroPostre.ingredientes))) {
+    return unPostre;
+  } else {
+    return otroPostre;
+  }
+}
+
+-------------------------------------
+
+function agregarAPostresRapidos (listaPostreRapidos,postreRapido) {
+  if (postreRapido.tiempoDeCoccion <= 60) {
+  agregar(listaPostreRapidos, postreRapido)
+  } else {
+    !listaPostreRapidos
+  }
+}
+---------------------------------------
+function endulzarMenu(menu){
+ agregar(menu.postre.ingredientes,"azucar");
+}
+
+--------------------------------
+
+
+
+
+
+
+procedure GuardaEnL() {
+  PonerAzulejo()
+  GuardaAl(Norte, Sur)
+  GuardaAl(Este, Oeste)
+}
+
+procedure GuardaAl(direccionDeIda, direccionDeVuelta) {
+  repeat(2) {
+    Mover(direccionDeIda)
+    PonerAzulejo()
+  }
+  MoverN(2,direccionDeVuelta)
+}
+  
+
+
+----------------------------------
+
+module Biblioteca
+  @libros = [Fundacion, Contacto, LaInsoportableLevedadDelSer, Socorro, ComoAguaParaChocolate]
+  
+  def self.nombres_de_libros
+    @libros.map {|libro| libro.nombre}
+  end
+  
+end
+
+
+--------------------------------
+
+
+function sumaDeLosMayoresASiete(numeros){
+  let sumatoria = 0;  //inicializamos en 0
+  for(let numero of numeros){  // recorre cada #
+    if(numero > 7) {
+      sumatoria += numero
+    }       // no hace falta el else
+  }
+  return sumatoria
+}
+
+
+
+------------------------------
+
+module Biblioteca
+  @libros = [Fundacion, Contacto, LaInsoportableLevedadDelSer, Socorro, ComoAguaParaChocolate]
+
+  def self.nombres_de_libros
+    @libros.map {|libro| libro.nombre}
+  end
+end

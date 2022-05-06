@@ -1,0 +1,152 @@
+  Pepita.pasear!
+undefined method `pasear!' for Pepita:Module (NoMethodError)
+
+Pepita.energia
+=> 100
+
+Pepita.comer_lombriz!
+=> nil
+
+ Pepita.se_la_banca?
+undefined method `se_la_banca?' for Pepita:Module (NoMethodError)
+
+energia
+undefined local variable or method `energia' for main:Object (NameError)
+
+  Pepita energia
+undefined local variable or method `energia' for main:Object (NameError)
+
+
+----------------------------------
+
+module Pepita
+end
+
+----------------------------------
+
+module Pepita
+   def self.cantar!
+   end
+end
+
+-------------------------------------
+
+module Pepita
+  def self.cantar!
+  end
+  
+  def self.comer_lombriz!
+  end
+  
+  def self.volar_en_circulos!
+  end
+end
+
+------------------------------------------
+
+¿Cómo podríamos decir que cuando Pepita vuela, pierde 10 unidades de energía? ¿Y que inicialmente esta energía es 100? Así:
+
+module Pepita
+  @energia = 100
+
+  def self.volar_en_circulos!
+    @energia = @energia - 10
+  end
+end
+
+
+
+en la consola:
+   Pepita.volar_en_circulos!
+=> 90
+   Pepita.volar_en_circulos!
+=> 80
+
+
+-------------------------------------
+
+module Pepita
+    @energia = 100     ---->ATRIBUTO
+  
+    def self.volar_en_circulos!
+        @energia -= 10
+    end
+  
+    def self.comer_lombriz!
+        @energia += 20
+    end
+end
+
+
+-----------------------------------------
+
+module Pepita
+    @energia = 100 
+    @ciudad = Iruya
+  
+    def self.volar_en_circulos!
+        @energia -= 10
+    end
+  
+    def self.comer_lombriz!
+        @energia += 20
+    end
+    
+    def self.volar_hacia!(destino)
+      @ciudad = destino
+      @energia -= 100
+    end
+      
+end
+
+
+----------------------------------------------
+
+
+class Camion
+  def initialize(muebles)
+    @muebles = muebles
+  end
+
+  def cargar_muebles!
+    @muebles.each{|mueble|mueble.ser_cargado!}
+  end
+
+end
+
+class Colchon
+  def initialize(resortes)
+    @cantidad_de_resortes = resortes
+  end
+
+  def cantidad_de_resortes
+    @cantidad_de_resortes
+  end
+  
+  def ser_cargado!
+    @cantidad_de_resortes = @cantidad_de_resortes-4
+  end
+
+end
+
+class Sillon
+  def initialize(polvo)
+    @nivel_de_polvo = polvo
+  end
+  
+  def nivel_de_polvo
+    @nivel_de_polvo
+  end
+  
+  def ser_cargado!
+    @nivel_de_polvo = @nivel_de_polvo + 20   
+  end
+  
+end
+
+class Electrodomestico
+  
+  def ser_cargado!
+  end
+  
+end
