@@ -816,4 +816,6 @@ module Biblioteca
   def self.nombres_de_libros
     @libros.map {|libro| libro.nombre}
   end
-end
+----------------------------------------------------------------------------------
+
+cambios para  para realizar pruebas.
